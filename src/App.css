@@ -26,3 +26,15 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+
+img {
+  max-width: 500px;
+}
+
+.container {
+  border: 1px solid black;
+  display: inline-block;
+  padding: 15px;
+  vertical-align: top;
+}
