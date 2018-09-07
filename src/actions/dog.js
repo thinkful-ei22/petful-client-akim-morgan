@@ -19,7 +19,7 @@ export const fetchDogFail = error => ({
 
 export const fetchDog = () => dispatch => {
   dispatch(setDogLoadingScreen());
-  fetch(`${API_BASEURL}/api/dog`, {
+  fetch(`${API_BASEURL}api/dog`, {
     method: "GET"
   })
     .then(res => {
@@ -50,7 +50,7 @@ export const fetchDog = () => dispatch => {
 
 export const deleteDog = () => dispatch => {
   dispatch(setDogLoadingScreen());
-  fetch(`${API_BASEURL}/api/dog`, {
+  fetch(`${API_BASEURL}api/dog`, {
     method: "DELETE"
   })
     .then(res => {

@@ -19,7 +19,7 @@ export const fetchCatFail = error => ({
 
 export const fetchCat = () => dispatch => {
   dispatch(setCatLoadingScreen());
-  fetch(`${API_BASEURL}/api/cat`, {
+  fetch(`${API_BASEURL}api/cat`, {
     method: "GET"
   })
     .then(res => {
@@ -48,7 +48,7 @@ export const fetchCat = () => dispatch => {
 
 export const deleteCat = () => dispatch => {
   dispatch(setCatLoadingScreen());
-  fetch(`${API_BASEURL}/api/cat`, {
+  fetch(`${API_BASEURL}api/cat`, {
     method: "DELETE"
   })
     .then(res => {
