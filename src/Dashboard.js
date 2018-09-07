@@ -1,34 +1,48 @@
-import React, { Component } from 'react';
-import './App.css';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import "./App.css";
+import Pet from "./components/Pet";
+import { fetchCat, deleteCat } from "./actions/cat";
+import { fetchDog, deleteDog } from "./actions/dog";
 
 class Dashboard extends Component {
+  componentDidMount() {
+    this.props.fetchCat();
+    this.props.fetchDog();
+  }
+
+  adoptPet(str) {
+    if (str === "cat") {
+      this.props.deleteCat();
+    } else {
+      this.props.deleteDog();
+    }
+  }
   render(props) {
     return (
-      <main className='animal-container'>
-        <section className='cat container'>
-          <h2>Name: {this.props.catToAdopt.name}</h2>
-          <img src={this.props.catToAdopt.imageURL} alt={this.props.catToAdopt.imageDescription}/>
-          <dl>
-            <dt>Age: {this.props.catToAdopt.age}</dt>
-            <dt>Breed: {this.props.catToAdopt.breed}</dt>
-            <dt>Story: {this.props.catToAdopt.story}</dt>
-          </dl>
-          <button name='adopt-cat' id='adopt-cat' className='adopt cat'>Adopt</button>
-        </section>
-        <section className='dog container'>
-          <h2>Name: {this.props.dogToAdopt.name}</h2>
-          <img src={this.props.dogToAdopt.imageURL} alt={this.props.dogToAdopt.imageDescription}/>
-          <dl>
-            <dt>Age: {this.props.dogToAdopt.age}</dt>
-            <dt>Breed: {this.props.dogToAdopt.breed}</dt>
-            <dt>Story: {this.props.dogToAdopt.story}</dt>
-          </dl>
-          <button name='adopt-dog' id='adopt-dog' className='adopt dog'>Adopt</button>
-        </section>
+      <main className="animal-container">
+        <Pet
+          catToAdopt={this.props.currentCat}
+          onAdoptPet={str => {
+            this.adoptPet(str);
+          }}
+        />
+        <Pet
+          dogToAdopt={this.props.currentDog}
+          onAdoptPet={str => {
+            this.adoptPet(str);
+          }}
+        />
       </main>
     );
   }
 }
 
-
-export default Dashboard;
+const mapStateToProps = state => ({
+  currentDog: state.dog.dog,
+  currentCat: state.cat.cat
+});
+export default connect(
+  mapStateToProps,
+  { fetchCat, deleteCat, fetchDog, deleteDog }
+)(Dashboard);
